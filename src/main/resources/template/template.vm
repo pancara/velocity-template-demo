@@ -1,0 +1,13 @@
+<html>
+<body>
+Personal Info
+<table>
+    <tr>
+        <td>$!{name}</td>
+    </tr>
+    <tr>
+        <td>$!{address}</td>
+    </tr>
+</table>
+</body>
+</html>
