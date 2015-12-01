@@ -10,8 +10,8 @@ import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by pancara on 12/1/15.
@@ -28,7 +28,9 @@ public class RenderTemplateDemo {
 
         ByteOutputStream os = new ByteOutputStream();
         Writer writer = new OutputStreamWriter(os);
-        template.merge(getContext(), writer);
+        VelocityContext context = createContext();
+        template.merge(context, writer);
+
         writer.flush();
 
         String text = new String(os.getBytes());
@@ -37,16 +39,17 @@ public class RenderTemplateDemo {
         writer.close();
     }
 
-    private static VelocityContext getContext() {
-        Map<String, Object> valueMap = new HashMap<String, Object>();
-
-        valueMap.put("name", "Badu");
-        valueMap.put("address", "Jakarta");
-
+    private static VelocityContext createContext() {
         VelocityContext context = new VelocityContext();
-        for (Map.Entry<String, Object> entry : valueMap.entrySet()) {
-            context.put(entry.getKey(), entry.getValue());
+        context.put("name", "Badu");
+        context.put("address", "Jakarta");
+
+        List list = new LinkedList();
+        for (int i = 0; i < 10; i++) {
+            list.add("Data " + i);
         }
+
+        context.put("list", list);
         return context;
     }
 }

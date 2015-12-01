@@ -1,13 +1,14 @@
 <html>
 <body>
-Personal Info
+Personal Info : $!{name} <br/>
+Address : $!{address}
+<br/>
 <table>
-    <tr>
-        <td>$!{name}</td>
-    </tr>
-    <tr>
-        <td>$!{address}</td>
-    </tr>
+    #set($idx = 1)
+    #foreach($data in $list)
+        <tr><td>${idx}.</td><td>$data</td></tr>
+        #set($idx = $idx + 1)
+    #end
 </table>
 </body>
 </html>
