@@ -1,12 +1,12 @@
 package com.pancara.demo.velocitytemplate;
 
-import com.sun.xml.internal.messaging.saaj.util.ByteOutputStream;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 import org.apache.velocity.runtime.RuntimeConstants;
 import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
@@ -26,14 +26,14 @@ public class RenderTemplateDemo {
         engine.init();
         Template template = engine.getTemplate("template/template.vm");
 
-        ByteOutputStream os = new ByteOutputStream();
+        ByteArrayOutputStream os = new ByteArrayOutputStream();
         Writer writer = new OutputStreamWriter(os);
         VelocityContext context = createContext();
         template.merge(context, writer);
 
         writer.flush();
 
-        String text = new String(os.getBytes());
+        String text = new String(os.toByteArray());
         System.out.println(text);
 
         writer.close();
